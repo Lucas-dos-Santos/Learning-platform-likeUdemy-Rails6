@@ -1,7 +1,34 @@
-- if current_user
-	= current_user.email
-	= link_to 'Account settings', edit_user_registration_path
-	= link_to 'Sign Out', destroy_user_session_path, method: :delete
-- else
-	= link_to 'Sign Up', new_user_registration_path
-	= link_to 'Log In', new_user_session_path
+%header.p-3.bg-dark.text-white
+  %div.me-4.ms-4
+    .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
+      %a.d-flex.align-items-center.mb-2.mb-lg-0.text-white.text-decoration-none.me-5{ href: '/' } 
+        %i.fa-solid.fa-gem.me-2{ style: 'color:red;font-size:40px;' }
+        Rubygem
+      - if current_user
+        %ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
+          %li
+            %a.nav-link.px-2.text-white.fs-4{:href => '/'} Home
+          %li
+            = link_to 'Courses', courses_path, class: 'nav-link px-2 text-white fs-4'
+
+        = form_tag courses_path, method: :get, class: 'col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3' do
+          = text_field_tag :title, params[:title], placeholder: 'Search', class: 'form-control form-control-dark text-white bg-dark'
+        .dropdown.text-end
+          %a#dropdownUser1.d-block.link-dark.text-white.text-decoration-none.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#'}
+            = current_user.email
+          %ul.dropdown-menu.text-small{'aria-labelledby': 'dropdownUser1'}
+            %li
+              = link_to edit_user_registration_path, class: 'dropdown-item' do
+                %i.fa-solid.fa-cog
+                Account Settings
+            %li
+              = link_to destroy_user_session_path, class: 'dropdown-item d-inline', method: :delete do
+                %i.fa-solid.fa-sign-out-alt
+                Sign Out
+
+      - else
+        %ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
+          %li
+            = link_to 'Sign Up', new_user_registration_path, class: 'nav-link px-2 text-secondary'
+          %li
+            = link_to 'Log In', new_user_session_path, class: 'nav-link px-2 text-secondary'
