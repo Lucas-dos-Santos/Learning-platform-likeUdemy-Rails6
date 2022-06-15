@@ -1,16 +1,56 @@
-%h1
-  Hello#world
-  %p Find me in app/views/home/index.html.erb
+.p-5.mb-4.bg-light.rounded-3.border.border-2
+  .container-fluid.py-5
+    %h1.display-5.text-center 
+      What do you want to learn today?
+    = form_tag courses_path, method: :get, class: 'col-6 m-auto' do
+      = text_field_tag :title, params[:title], placeholder: 'Search...', class: 'form-control form-control-dark text-white bg-dark'
 
+.card-group
+  .card.card-body
+    %h1
+      .fa.fa-graduation-cap
+    = Course.count
+    online courses
+    .row
+    Explore a variety of fresh topics
+  .card.card-body
+    %h1
+      .fa.fa-chalkboard-teacher
+      /.fa.fa-brain
+    = Course.distinct.count(:user_id)
+    expert instructors
+    .row
+    Find the right instructor for you
+  .card.card-body
+    %h1
+      .fa.fa-user-graduate
+    = User.count
+    active learners
+    .row
+    Join the knowledge sharing community
+  .card.card-body
+    %h1
+      .fa.fa-infinity
+    Lifetime access
+    .row
+    Learn on your schedule
 
-.fa.fa-flag
-.fab.fa-amazon
-= link_to root_path do
-  .fa.fa-home
-
-= link_to courses_path, class: 'btn btn-success text-white' do
-  .fa.fa-book
-  Course
-  
-%i{ class: "far fa-address-book" }
-%i{ class: "fab fa-github" }
+%hr
+%h2
+  Popular courses
+.row.row-cols-3
+  - @courses.each do |course|
+    = render 'courses/course', course: course
+%hr
+%h2
+  Top rated courses
+.row.row-cols-3
+  - @courses.each do |course|
+    = render 'courses/course', course: course
+%hr
+%h2
+  Latest courses
+.row.row-cols-3
+  - @latest_courses.each do |course|
+    = render 'courses/course', course: course
+%hr

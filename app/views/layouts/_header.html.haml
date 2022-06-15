@@ -7,12 +7,21 @@
       - if current_user
         %ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
           %li
-            %a.nav-link.px-2.text-white.fs-4{:href => '/'} Home
+            = link_to root_path, class: "nav-link px-2 text-secondary fs-5 #{set_active(root_path)}" do
+              .fa.fa-home
+              Home
           %li
-            = link_to 'Courses', courses_path, class: 'nav-link px-2 text-white fs-4'
+            = link_to courses_path, class: "nav-link px-2 text-secondary fs-5 #{set_active(courses_path)}" do
+              .fa.fa-book
+              Courses
+          %li
+            = link_to new_course_path, class: "nav-link px-2 text-secondary fs-5 #{set_active(new_course_path)}" do
+              .fa.fa-plus 
+              New Course
 
         = form_tag courses_path, method: :get, class: 'col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3' do
           = text_field_tag :title, params[:title], placeholder: 'Search', class: 'form-control form-control-dark text-white bg-dark'
+
         .dropdown.text-end
           %a#dropdownUser1.d-block.link-dark.text-white.text-decoration-none.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#'}
             = current_user.email
