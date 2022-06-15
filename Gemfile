@@ -9,6 +9,7 @@ gem "haml-rails", "~> 2.0"
 gem 'simple_form'
 gem 'faker'
 gem 'devise'
+gem 'friendly_id', '~> 5.4.0'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
