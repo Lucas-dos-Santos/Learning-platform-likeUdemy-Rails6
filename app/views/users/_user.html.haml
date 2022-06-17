@@ -1,0 +1,15 @@
+.col-4
+	.card
+		.card-header 
+			.fa.fa-user 
+			= user.email
+		.card-footer 
+			Signed up
+			= time_ago_in_words(user.created_at)
+			ago
+		.card-footer 
+			= user.sign_in_count
+			= user.current_sign_in_at
+			= user.last_sign_in_at
+			= user.current_sign_in_ip
+			= user.last_sign_in_ip

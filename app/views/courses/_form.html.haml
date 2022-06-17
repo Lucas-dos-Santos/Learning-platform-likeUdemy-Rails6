@@ -6,7 +6,10 @@
   .form-inputs
     = f.input :title
     = f.label :description
-    = f.rich_text_area :description
+    = f.text_area :description, id: 'ckeditor'
 
   .form-actions
     = f.button :submit
+
+:javascript
+  ClassicEditor.create(document.querySelector('#ckeditor'));
