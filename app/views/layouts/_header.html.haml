@@ -1,9 +1,8 @@
-%header.p-3.bg-white.text-dark.border-bottom
+%header.py-3.px-1.bg-white.text-dark.border-bottom
   %div.me-4.ms-4
     .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
       %a.d-flex.align-items-center.mb-2.mb-lg-0.text-dark.text-decoration-none.me-5{ href: '/' } 
-        %i.fa-solid.fa-gem.me-2{ style: 'color:red;font-size:40px;' }
-        Udemy
+        = image_tag 'logo-udemy-clone', width: 91, height: 34
       - if current_user
         %ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
           %li
@@ -27,7 +26,7 @@
           = text_field_tag :title, params[:title], placeholder: 'Search', class: 'form-control form-control-dark text-white bg-dark'
 
         .dropdown.text-end
-          %a#dropdownUser1.d-block.link-dark.text-white.text-decoration-none.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#'}
+          %a#dropdownUser1.d-block.link-dark.text-dark.text-decoration-none.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#'}
             = current_user.email
           %ul.dropdown-menu.text-small{'aria-labelledby': 'dropdownUser1'}
             %li
