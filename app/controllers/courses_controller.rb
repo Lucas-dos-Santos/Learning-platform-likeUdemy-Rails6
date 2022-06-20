@@ -21,7 +21,6 @@ class CoursesController < ApplicationController
   end
 
   def create
-    byebug
     @course = Course.new(course_params)
     @course.user = current_user
 
