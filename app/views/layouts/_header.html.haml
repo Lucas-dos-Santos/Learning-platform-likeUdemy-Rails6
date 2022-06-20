@@ -1,5 +1,5 @@
-%header.py-3.px-1.bg-white.text-dark.border-bottom
-  %div.me-4.ms-4
+%header.bg-white.text-dark.border-bottom.header-logo
+  %div.me-4
     .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
       %a.d-flex.align-items-center.mb-2.mb-lg-0.text-dark.text-decoration-none.me-5{ href: '/' } 
         = image_tag 'https://i.ibb.co/MgcBxQ9/logo-udemy-clone.png', width: 91, height: 34
@@ -11,7 +11,7 @@
               Home
           %li
             = link_to courses_path, class: "nav-link px-2 text-secondary fs-5 #{set_active(courses_path)}" do
-              .fa.fa-book
+              .fa.fa-graduation-cap
               Courses
           %li
             = link_to new_course_path, class: "nav-link px-2 text-secondary fs-5 #{set_active(new_course_path)}" do

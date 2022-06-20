@@ -30,4 +30,18 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      course: Vagas
+    attributes:
+      course:
+        levels: 
+          beginner: Beginner
+          intermediate: Intermediate
+          advanced: Advanced
+        languages:
+          english: English
+          polish: Polish
+          russian: Russian
+          portuguese: Portuguese
+
