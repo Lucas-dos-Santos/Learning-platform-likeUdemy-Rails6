@@ -1,12 +1,19 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
-  before_action :set_i18n_levels, :set_i18n_languages, except: [:index, :destroy]
+  before_action :set_i18n_levels, :set_i18n_languages, except: [:destroy]
 
   def index
     if params[:title]
       @courses = Course.where('title ILIKE ?', "%#{params[:title]}%")
     else
-      @courses = Course.all
+      if params[:q]
+        @language_selected = params[:q][:language_eq]
+        @level_selected = params[:q][:level_eq]
+        params[:q][:level_eq] = Course.levels[params[:q][:level_eq]]
+        params[:q][:language_eq] = Course.languages[params[:q][:language_eq]]
+      end
+      @q = Course.ransack(params[:q])
+      @courses = @q.result(distinct: true) 
     end
   end
 
