@@ -22,8 +22,8 @@
               .fa.fa-users 
               Users
 
-        = form_tag courses_path, method: :get, class: 'col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3' do
-          = text_field_tag :title, params[:title], placeholder: 'Search', class: 'form-control form-control-dark text-white bg-dark'
+        = search_form_for @filter_courses, as: :courses_search, url: courses_path, class: 'col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3' do |f|
+          = f.search_field :title_cont, class: 'form-control-sm', placeholder: 'Find a course'
 
         .dropdown.text-end
           %a#dropdownUser1.d-block.link-dark.text-dark.text-decoration-none.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#'}

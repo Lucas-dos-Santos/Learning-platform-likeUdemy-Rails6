@@ -1,20 +1,28 @@
 %h1 
-  Courses
-  = @courses.count
-
+  = "%{count} results for “%{title}”" % { count:@courses.count, title: @title_serched } if @title_serched
 .row
-  .row-cols-2
-    .form-inline
-      = search_form_for @q do |f|
-        = f.search_field :title_cont, placeholder: 'title'
-        = f.search_field :short_description_cont, placeholder: 'description'
-        = f.collection_select :language_eq, @languages, :first, :last, {include_blank: true, selected: @language_selected}, placeholder: 'language'
-        = f.collection_select :level_eq, @levels, :first, :last, {include_blank: true, selected: @level_selected}, placeholder: 'level'
-        = f.search_field :price_eq, placeholder: 'price'
-        = f.submit
-      .ml-2
-      = link_to courses_path, class: 'btn btn-sm btn-secondary' do
-        .fa.fa-sync
-  .row-cols-10
-    - @courses.each do |course|
-      = render 'course', course: course
+  .col-2
+    = button_tag :language, 'data-bs-toggle': 'collapse', href: '#filter-languages'
+    = search_form_for @filter_courses, as: :courses_search, url: courses_path  do |f|
+      = f.hidden_field :title_cont
+      #filter-languages.collapse
+        = f.collection_check_boxes :language_in, @languages, :last, :first, { selected: @language_selected }
+      = f.label :level
+      %br
+      = f.collection_check_boxes :level_in, @levels, :last, :first, { selected: @level_selected }
+      = f.search_field :price_eq, placeholder: 'Price', class: 'form-control mb-3'
+      .d-flex
+        = f.submit class: 'hidden', id: 'button-form-courses'
+        = link_to courses_path, class: 'btn btn-sm btn-secondary d-flex align-items-center' do
+          .fa.fa-sync
+  .col-10
+    .row
+      - @courses.each do |course|
+        = render 'course', course: course
+
+:javascript
+  $('#course_search input').click(function() {
+    setTimeout(function() {
+      $('#button-form-courses').trigger('click') 
+    }, 100)
+  })

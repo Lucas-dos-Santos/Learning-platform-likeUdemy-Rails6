@@ -3,18 +3,10 @@ class CoursesController < ApplicationController
   before_action :set_i18n_levels, :set_i18n_languages, except: [:destroy]
 
   def index
-    if params[:title]
-      @courses = Course.where('title ILIKE ?', "%#{params[:title]}%")
-    else
-      if params[:q]
-        @language_selected = params[:q][:language_eq]
-        @level_selected = params[:q][:level_eq]
-        params[:q][:level_eq] = Course.levels[params[:q][:level_eq]]
-        params[:q][:language_eq] = Course.languages[params[:q][:language_eq]]
-      end
-      @q = Course.ransack(params[:q])
-      @courses = @q.result(distinct: true) 
-    end
+    set_selecteds(params[:courses_search])
+    @title_serched = params[:courses_search][:title_cont] if params[:courses_search]
+    @filter_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
+    @courses = @filter_courses.result
   end
 
   def show
@@ -74,10 +66,17 @@ class CoursesController < ApplicationController
     end
 
     def set_i18n_levels
-      @levels = I18n.t('activerecord.attributes.course.levels')
+      @levels = Course.levels
     end
 
     def set_i18n_languages
-      @languages = I18n.t('activerecord.attributes.course.languages')
+      @languages = Course.languages
+    end
+
+    def set_selecteds(courses_search)
+      if courses_search
+        @language_selected = params[:courses_search][:language_eq]
+        @level_selected = params[:courses_search][:level_eq]
+      end
     end
 end
