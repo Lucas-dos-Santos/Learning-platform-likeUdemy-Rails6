@@ -1,27 +1,39 @@
-%h1 
+%h1.fw-bold
   = "%{count} results for “%{title}”" % { count:@courses.count, title: @title_serched } if @title_serched
 .row
-  .col-2
-    = button_tag :language, 'data-bs-toggle': 'collapse', href: '#filter-languages'
-    = search_form_for @filter_courses, as: :courses_search, url: courses_path  do |f|
-      = f.hidden_field :title_cont
-      #filter-languages.collapse
-        = f.collection_check_boxes :language_in, @languages, :last, :first, { selected: @language_selected }
-      = f.label :level
-      %br
-      = f.collection_check_boxes :level_in, @levels, :last, :first, { selected: @level_selected }
-      = f.search_field :price_eq, placeholder: 'Price', class: 'form-control mb-3'
-      .d-flex
-        = f.submit class: 'hidden', id: 'button-form-courses'
-        = link_to courses_path, class: 'btn btn-sm btn-secondary d-flex align-items-center' do
-          .fa.fa-sync
-  .col-10
+  .col-3.pe-4
+    = search_form_for @filter_courses, as: :courses_search, url: courses_path, id: 'filter-form'  do |f|
+      .d-flex.flex-column
+        = f.hidden_field :title_cont
+        %a{ 'data-bs-toggle': 'collapse', href: '#filter-languages', class: 'topics-menu' }
+          = I18n.t(:language)
+          %i.fa-solid.fa-angle-down
+        #filter-languages.collapse{ class: set_collapse_exhibit(@language_selected.size) }
+          = f.collection_check_boxes :language_in, @languages, :last, :first, { selected: @language_selected } do |b|
+            .topics-boxes
+              = b.check_box( class: "#{set_check_box(b.check_box.include?('checked'))} me-2" )
+              = b.label( class: 'pb-1' )  
+        %a{ 'data-bs-toggle': 'collapse', href: '#filter-levels', class: 'topics-menu' }
+          = I18n.t(:level)
+          %i.fa-solid.fa-angle-down
+
+        #filter-levels.collapse{ class: set_collapse_exhibit(@level_selected.size) }
+          = f.collection_check_boxes :level_in, @levels, :last, :first, { selected: @level_selected } do |b|
+            .topics-boxes
+              = b.check_box( class: "#{set_check_box(b.check_box.include?('checked'))} me-2" )
+              = b.label( class: 'pb-1' ) 
+        %hr.m-1
+        .d-flex
+          = f.submit class: 'hidden', id: 'button-form-courses'
+          = link_to I18n.t(:clear_filter), courses_path
+
+  .col-9
     .row
       - @courses.each do |course|
         = render 'course', course: course
 
 :javascript
-  $('#course_search input').click(function() {
+  $('#filter-form input').click(function() {
     setTimeout(function() {
       $('#button-form-courses').trigger('click') 
     }, 100)

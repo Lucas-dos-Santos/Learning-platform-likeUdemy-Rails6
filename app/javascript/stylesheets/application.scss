@@ -1,11 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
 body {
 	margin: 0 !important;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
+	font-family: 'Open Sans', sans-serif;
 	vertical-align: baseline;
 }
 
@@ -25,8 +26,14 @@ a:link {
 }
 
 a:hover {
+	background-color: inherit;
+	color: inherit;
 	opacity: 0.7;
 	text-decoration: none;
+}
+
+input[type="checkbox"] {
+	appearance: none;
 }
 
 .ck.ck-content {
@@ -54,4 +61,23 @@ is-invalid {
 
 .hidden {
 	display: none;
+}
+
+.topics-menu {
+	font-weight: 500;
+	display: flex;
+	justify-content: space-between;
+	font-size: 1rem;
+	padding: 10px 0;
+	border-top: 1px solid #d1d7dc;
+}
+
+.topics-boxes {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.borders {
+	border: 1px solid black;
 }

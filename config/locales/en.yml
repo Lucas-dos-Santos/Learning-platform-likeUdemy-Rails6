@@ -39,9 +39,12 @@ en:
           beginner: Beginner
           intermediate: Intermediate
           advanced: Advanced
-        languages:
+        languages: 
           english: English
           polish: Polish
           russian: Russian
           portuguese: Portuguese
+  language: Language
+  level: Level
+  clear_filter: Clear Filter
 

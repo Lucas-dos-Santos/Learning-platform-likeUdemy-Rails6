@@ -74,9 +74,7 @@ class CoursesController < ApplicationController
     end
 
     def set_selecteds(courses_search)
-      if courses_search
-        @language_selected = params[:courses_search][:language_eq]
-        @level_selected = params[:courses_search][:level_eq]
-      end
+      @language_selected = courses_search ? (params[:courses_search][:language_in] || []) : []
+      @level_selected = courses_search ? (params[:courses_search][:level_in] || []) : []
     end
 end
