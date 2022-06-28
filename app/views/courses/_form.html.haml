@@ -12,9 +12,9 @@
     %br
     = f.input :short_description
     %br
-    = f.input :language, as: :select, collection: @languages, label_method: :second, value_method: :first, include_blank: false, selected: @course.language
+    = f.input :language, as: :select, collection: @languages, label_method: :first, value_method: :first, include_blank: false, selected: @course.language
     %br
-    = f.input :level, as: :select, collection: @levels, label_method: :second, value_method: :first, include_blank: false, selected: @course.level
+    = f.input :level, as: :select, collection: @levels, label_method: :first, value_method: :first, include_blank: false, selected: @course.level
     %br
     = f.input :price
     %br

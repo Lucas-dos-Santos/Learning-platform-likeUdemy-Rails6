@@ -22,7 +22,8 @@
 			.div
 				.fa.fa-chalkboard-teacher
 				= course.user.email
-		.card-footer 
-			= link_to 'Show', course, class: 'btn btn-sm btn-info text-white'
-			= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-success text-white'
-			= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-secondary text-white'
+		- if policy(course).edit?
+			.card-footer 
+				= link_to 'Show', course, class: 'btn btn-sm btn-info text-white'
+				= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-success text-white'
+				= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-secondary text-white'
