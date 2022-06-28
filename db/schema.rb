@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_28_014615) do
+ActiveRecord::Schema.define(version: 2022_06_28_231939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 2022_06_28_014615) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["course_id"], name: "index_lessons_on_course_id"
+    t.index ["slug"], name: "index_lessons_on_slug", unique: true
   end
 
   create_table "roles", force: :cascade do |t|
@@ -82,4 +93,5 @@ ActiveRecord::Schema.define(version: 2022_06_28_014615) do
   end
 
   add_foreign_key "courses", "users"
+  add_foreign_key "lessons", "courses"
 end

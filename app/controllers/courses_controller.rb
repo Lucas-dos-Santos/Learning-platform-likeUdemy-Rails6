@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
   def index
     set_selecteds(params[:courses_search])
     @title_serched = params[:courses_search][:title_cont] if params[:courses_search]
-    @filter_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
+    @filter_courses = Course.includes(:lessons).ransack(params[:courses_search], search_key: :courses_search)
     @courses = @filter_courses.result
   end
 
@@ -58,7 +58,7 @@ class CoursesController < ApplicationController
   private
 
     def set_course
-      @course = Course.friendly.find(params[:id])
+      @course = Course.includes(:lessons).friendly.find(params[:id])
       authorize @course
     end
 

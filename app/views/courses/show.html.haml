@@ -2,4 +2,8 @@
 \/
 = link_to @course.title, course_path(@course), class: 'text-primary'
 
-= render 'course', course: @course
+.row
+	.col-lg-6
+		= render @course
+	.col-lg-6
+		= render @course.lessons

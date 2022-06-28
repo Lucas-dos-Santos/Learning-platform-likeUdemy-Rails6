@@ -5,9 +5,14 @@
 			= link_to course.title, course_path(course)
 		.card-body
 			= course.short_description
-		.card-footer 
-			.text-center
-				= number_to_currency(course.price)
+		.card-footer.d-flex.justify-content-between
+			.div
+				.fa.fa-book
+				- byebug
+				= course.lessons.count
+			.div
+				.text-center
+					= number_to_currency(course.price)
 		.card-footer.d-flex.justify-content-between
 			.div
 				.fa.fa-globe-africa
@@ -22,6 +27,7 @@
 			.div
 				.fa.fa-chalkboard-teacher
 				= course.user.email
+
 		- if policy(course).edit?
 			.card-footer 
 				= link_to 'Show', course, class: 'btn btn-sm btn-info text-white'
