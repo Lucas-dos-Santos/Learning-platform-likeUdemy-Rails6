@@ -26,8 +26,9 @@
           = f.search_field :title_cont, class: 'form-control-sm', placeholder: 'Find a course'
 
         .dropdown.text-end
-          %a#dropdownUser1.d-block.link-dark.text-dark.text-decoration-none.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#'}
-            = current_user.email
+          .user-profile-logo.display-center
+            %a#dropdownUser1.font-monospace{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#'}
+              = current_user.email.first.capitalize
           %ul.dropdown-menu.text-small{'aria-labelledby': 'dropdownUser1'}
             %li
               = link_to edit_user_registration_path, class: 'dropdown-item' do
