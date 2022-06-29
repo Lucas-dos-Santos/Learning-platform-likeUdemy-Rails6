@@ -7,7 +7,7 @@
     = f.input :title
     %br
     = f.label :description
-    = f.text_area :description, id: 'ckeditor'
+    = f.text_area :description, id: 'ckeditor-courses'
     = f.error :description, class: 'text-danger'
     %br
     = f.input :short_description
@@ -23,4 +23,4 @@
     = f.button :submit, class: 'btn btn-outline-success'
 
 :javascript
-  ClassicEditor.create(document.querySelector('#ckeditor'));
+  ClassicEditor.create(document.querySelector('#ckeditor-courses'));

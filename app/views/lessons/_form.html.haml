@@ -5,8 +5,13 @@
 
   .form-inputs
     = f.input :title
-    = f.input :content
-    = f.association :course
+    = f.label :content
+    = f.text_area :content, id: 'ckeditor-lessons'
+    = f.error :content, class: 'text-danger'
+    = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
 
   .form-actions
     = f.button :submit
+
+:javascript
+  ClassicEditor.create(document.querySelector('#ckeditor-lessons'));
