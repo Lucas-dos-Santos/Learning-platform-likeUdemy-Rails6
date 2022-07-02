@@ -31,7 +31,7 @@
     .row
       - @courses.each do |course|
         = render 'course', course: course
-
+    != pagy_bootstrap_nav(@pagy)
 :javascript
   $('#filter-form input').click(function() {
     setTimeout(function() {

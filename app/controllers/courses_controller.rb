@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
     set_selecteds(params[:courses_search])
     @title_serched = params[:courses_search][:title_cont] if params[:courses_search]
     @filter_courses = Course.includes(:lessons).ransack(params[:courses_search], search_key: :courses_search)
-    @courses = @filter_courses.result
+    @pagy, @courses = pagy(@filter_courses.result.includes(:user))
   end
 
   def show
