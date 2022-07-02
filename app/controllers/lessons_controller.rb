@@ -6,6 +6,7 @@ class LessonsController < ApplicationController
   end
 
   def show
+    @title_head = @lesson.title
   end
 
   def new

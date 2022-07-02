@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Udemy - Clone
+    %title= title_head(@title_head)
     %script{:src => "https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"}
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     = favicon_link_tag asset_path('favicon.png')

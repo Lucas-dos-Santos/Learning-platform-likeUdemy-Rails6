@@ -10,6 +10,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @title_head = @course.title
   end
 
   def new
